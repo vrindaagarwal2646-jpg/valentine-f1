@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>F1 Love Grand Prix 💘🏎️</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- INTRO SCREEN -->
+  <div id="introScreen" class="screen">
+    <h1 class="title">🏎️ F1 LOVE GRAND PRIX 💘</h1>
+    <p class="subtitle">Start the race... and reach the finish line of love 💋</p>
+
+    <button id="startBtn" class="btn glow">START THE RACE</button>
+
+    <p class="hint">💘 Warning: Romantic overload ahead</p>
+  </div>
+
+  <!-- GAME SCREEN -->
+  <div id="gameScreen" class="hidden">
+
+    <div class="hud">
+      <div class="hud-box">🏁 Lap: <span id="lapCount">1</span>/1</div>
+      <div class="hud-box">⚡ Speed: <span id="speedMeter">0</span> km/h</div>
+      <div class="hud-box">💘 Checkpoint: <span id="checkpointCount">0</span>/5</div>
+    </div>
+
+    <!-- TRACK -->
+    <div class="track">
+      <div class="finish-line">FINISH</div>
+
+      <!-- CAR -->
+      <div id="car" class="car">
+        <div class="car-body"></div>
+        <div class="car-spoiler"></div>
+      </div>
+
+      <!-- CHECKPOINTS -->
+      <div class="checkpoint" data-check="1" style="left: 15%;">🌹</div>
+      <div class="checkpoint" data-check="2" style="left: 35%;">🌸</div>
+      <div class="checkpoint" data-check="3" style="left: 55%;">💐</div>
+      <div class="checkpoint" data-check="4" style="left: 75%;">🌷</div>
+      <div class="checkpoint" data-check="5" style="left: 90%;">💘</div>
+    </div>
+
+    <div class="controls">
+      <button id="boostBtn" class="btn boost">💗 NITRO BOOST</button>
+      <button id="stopBtn" class="btn danger">⛔ STOP</button>
+    </div>
+
+  </div>
+
+  <!-- FINISH POPUP -->
+  <div id="lovePopup" class="popup hidden">
+    <div class="popup-box">
+      <h2>💌 FINISH LINE LOVE LETTER 💘</h2>
+      <p id="loveText"></p>
+
+      <div class="valentineQuestion">
+        <h3>Will you stay with me forever? 🥺</h3>
+        <div class="choiceBtns">
+          <button id="yesBtn" class="btn yes">YES 💍</button>
+          <button id="noBtn" class="btn no">NO 🙄</button>
+        </div>
+      </div>
+
+      <div id="finalMessage" class="hidden finalMessage">
+        <h2>🏁💘 YAYYYYY YOU'RE MY FOREVER VALENTINE 💘🏁</h2>
+        <p>Now come here… cuddle time 24/7 😭❤️</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Flower Rain -->
+  <div id="flowerRain"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
