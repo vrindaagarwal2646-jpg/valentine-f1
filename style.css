@@ -1,81 +1,337 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>F1 Love Grand Prix 💘🏎️</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b0b12;
+  color: white;
+  overflow-x: hidden;
+}
 
-  <!-- INTRO SCREEN -->
-  <div id="introScreen" class="screen">
-    <h1 class="title">🏎️ F1 LOVE GRAND PRIX 💘</h1>
-    <p class="subtitle">Start the race... and reach the finish line of love 💋</p>
+/* START SCREEN */
+.startScreen {
+  text-align: center;
+  padding: 25px 15px;
+  background: linear-gradient(135deg, #0b0b12, #1b0025);
+  border-bottom: 2px solid rgba(255, 105, 180, 0.3);
+}
 
-    <button id="startBtn" class="btn glow">START THE RACE</button>
+.startScreen h1 {
+  font-size: 2rem;
+  margin: 0;
+  color: #ff66cc;
+  text-shadow: 0px 0px 10px rgba(255, 105, 180, 0.6);
+}
 
-    <p class="hint">💘 Warning: Romantic overload ahead</p>
-  </div>
+.startScreen p {
+  margin: 10px 0;
+  font-size: 1rem;
+  opacity: 0.9;
+}
 
-  <!-- GAME SCREEN -->
-  <div id="gameScreen" class="hidden">
+.warning {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
 
-    <div class="hud">
-      <div class="hud-box">🏁 Lap: <span id="lapCount">1</span>/1</div>
-      <div class="hud-box">⚡ Speed: <span id="speedMeter">0</span> km/h</div>
-      <div class="hud-box">💘 Checkpoint: <span id="checkpointCount">0</span>/5</div>
-    </div>
+.mainBtn {
+  padding: 12px 18px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 12px;
+  background: #ff4da6;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0px 0px 15px rgba(255, 77, 166, 0.6);
+}
 
-    <!-- TRACK -->
-    <div class="track">
-      <div class="finish-line">FINISH</div>
+.mainBtn:active {
+  transform: scale(0.95);
+}
 
-      <!-- CAR -->
-      <div id="car" class="car">
-        <div class="car-body"></div>
-        <div class="car-spoiler"></div>
-      </div>
+/* HUD */
+.hud {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px;
+  flex-wrap: wrap;
+}
 
-      <!-- CHECKPOINTS -->
-      <div class="checkpoint" data-check="1" style="left: 15%;">🌹</div>
-      <div class="checkpoint" data-check="2" style="left: 35%;">🌸</div>
-      <div class="checkpoint" data-check="3" style="left: 55%;">💐</div>
-      <div class="checkpoint" data-check="4" style="left: 75%;">🌷</div>
-      <div class="checkpoint" data-check="5" style="left: 90%;">💘</div>
-    </div>
+.hudBox {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 105, 180, 0.25);
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 0.95rem;
+}
 
-    <div class="controls">
-      <button id="boostBtn" class="btn boost">💗 NITRO BOOST</button>
-      <button id="stopBtn" class="btn danger">⛔ STOP</button>
-    </div>
+/* GAME AREA */
+.gameArea {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  padding-bottom: 20px;
+}
 
-  </div>
+.track {
+  position: relative;
+  width: 95%;
+  max-width: 900px;
+  height: 260px;
+  border-radius: 25px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #2c2c2c, #1a1a1a);
+  border: 2px solid rgba(255, 105, 180, 0.35);
+  box-shadow: 0px 0px 25px rgba(255, 77, 166, 0.2);
+}
 
-  <!-- FINISH POPUP -->
-  <div id="lovePopup" class="popup hidden">
-    <div class="popup-box">
-      <h2>💌 FINISH LINE LOVE LETTER 💘</h2>
-      <p id="loveText"></p>
+/* LANE LINES */
+.laneLine {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 200%;
+  height: 6px;
+  background: repeating-linear-gradient(
+    90deg,
+    white 0px,
+    white 30px,
+    transparent 30px,
+    transparent 60px
+  );
+  opacity: 0.4;
+  transform: translateY(-50%);
+  animation: roadMove 0.6s linear infinite;
+}
 
-      <div class="valentineQuestion">
-        <h3>Will you stay with me forever? 🥺</h3>
-        <div class="choiceBtns">
-          <button id="yesBtn" class="btn yes">YES 💍</button>
-          <button id="noBtn" class="btn no">NO 🙄</button>
-        </div>
-      </div>
+.lane2 {
+  top: 70%;
+  opacity: 0.25;
+  animation-duration: 0.8s;
+}
 
-      <div id="finalMessage" class="hidden finalMessage">
-        <h2>🏁💘 YAYYYYY YOU'RE MY FOREVER VALENTINE 💘🏁</h2>
-        <p>Now come here… cuddle time 24/7 😭❤️</p>
-      </div>
-    </div>
-  </div>
+@keyframes roadMove {
+  from { transform: translateX(0) translateY(-50%); }
+  to { transform: translateX(-200px) translateY(-50%); }
+}
 
-  <!-- Flower Rain -->
-  <div id="flowerRain"></div>
+/* CHECKPOINT FLAGS */
+.checkpointFlag {
+  position: absolute;
+  top: 25px;
+  padding: 6px 10px;
+  border-radius: 14px;
+  font-size: 0.85rem;
+  background: rgba(255, 105, 180, 0.2);
+  border: 1px solid rgba(255, 105, 180, 0.4);
+  box-shadow: 0px 0px 10px rgba(255, 77, 166, 0.25);
+}
 
-  <script src="script.js"></script>
-</body>
-</html>
+#cp1 { left: 18%; }
+#cp2 { left: 35%; top: 80px; }
+#cp3 { left: 52%; top: 35px; }
+#cp4 { left: 68%; top: 95px; }
+#cp5 { left: 82%; top: 55px; }
+
+/* FINISH LINE */
+.finishLine {
+  position: absolute;
+  right: 15px;
+  top: 0;
+  height: 100%;
+  width: 80px;
+  background: repeating-linear-gradient(
+    0deg,
+    black 0px,
+    black 20px,
+    white 20px,
+    white 40px
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #ff4da6;
+  text-shadow: 0px 0px 10px rgba(255, 77, 166, 0.8);
+}
+
+/* CAR */
+.car {
+  position: absolute;
+  bottom: 40px;
+  left: 15px;
+  font-size: 3rem;
+  transition: left 0.08s linear, bottom 0.08s linear;
+  z-index: 10;
+}
+
+.carGlow {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: rgba(255, 77, 166, 0.25);
+  filter: blur(12px);
+  top: 10px;
+  left: 10px;
+  z-index: -1;
+}
+
+/* NITRO FLAME */
+.nitroFlame {
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  font-size: 1.8rem;
+  opacity: 0;
+  transition: opacity 0.1s;
+  z-index: 9;
+}
+
+/* CONTROLS */
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding: 10px;
+}
+
+.nitroBtn, .stopBtn {
+  padding: 12px 18px;
+  border-radius: 15px;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.nitroBtn {
+  background: #ff4da6;
+  color: white;
+  box-shadow: 0px 0px 12px rgba(255, 77, 166, 0.6);
+}
+
+.stopBtn {
+  background: #ff3333;
+  color: white;
+  box-shadow: 0px 0px 12px rgba(255, 50, 50, 0.6);
+}
+
+/* FLOWERS */
+.flower {
+  position: absolute;
+  top: -40px;
+  font-size: 1.6rem;
+  animation: fall 2.2s linear forwards;
+  z-index: 50;
+}
+
+@keyframes fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(320px) rotate(360deg); opacity: 0; }
+}
+
+/* FIREWORKS */
+.firework {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: gold;
+  animation: boom 1s ease-out forwards;
+  z-index: 60;
+}
+
+@keyframes boom {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(12); opacity: 0; }
+}
+
+/* POPUP */
+.popupOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 20px;
+}
+
+.popupCard {
+  background: #1b0025;
+  padding: 20px;
+  border-radius: 20px;
+  max-width: 650px;
+  width: 100%;
+  border: 2px solid rgba(255, 105, 180, 0.35);
+  box-shadow: 0px 0px 25px rgba(255, 77, 166, 0.4);
+}
+
+.popupCard h2 {
+  margin-top: 0;
+  color: #ff66cc;
+}
+
+.popupCard p {
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+.question {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: white;
+}
+
+.choiceBtns {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.yesBtn, .noBtn {
+  padding: 10px 15px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.yesBtn {
+  background: #00d26a;
+  color: white;
+}
+
+.noBtn {
+  background: #444;
+  color: white;
+}
+
+.yay {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+/* CINEMATIC FINISH */
+.slowmoOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 77, 166, 0.12);
+  backdrop-filter: blur(4px);
+  z-index: 150;
+  animation: fadeSlowmo 2s ease-in-out forwards;
+  pointer-events: none;
+}
+
+@keyframes fadeSlowmo {
+  0% { opacity: 0; }
+  30% { opacity: 1; }
+  100% { opacity: 0; }
+}
